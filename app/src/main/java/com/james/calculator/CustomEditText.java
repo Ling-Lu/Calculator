@@ -1,13 +1,12 @@
 package com.james.calculator;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.ContextWrapper;
 import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatEditText;
 import android.util.AttributeSet;
 import android.util.TypedValue;
+
+import net.objecthunter.exp4j.ExpressionBuilder;
 
 public class CustomEditText extends AppCompatEditText {
     private Snackbar snackbar;
@@ -36,21 +35,19 @@ public class CustomEditText extends AppCompatEditText {
 
     private void refitText(String text, int textWidth) {
         if (textWidth > 0) {
-            int availableWidth = textWidth - this.getPaddingLeft()
-                    - this.getPaddingRight();
+            int availableWidth = textWidth - getPaddingLeft() - getPaddingRight();
             float trySize = maxTextSize;
 
-            this.setTextSize(TypedValue.COMPLEX_UNIT_PX, trySize);
-            while ((trySize > minTextSize)
-                    && (this.getPaint().measureText(text) > availableWidth)) {
+            setTextSize(TypedValue.COMPLEX_UNIT_PX, trySize);
+            while (trySize > minTextSize && getPaint().measureText(text) > availableWidth) {
                 trySize -= 1;
                 if (trySize <= minTextSize) {
                     trySize = minTextSize;
                     break;
                 }
-                this.setTextSize(TypedValue.COMPLEX_UNIT_PX, trySize);
+                setTextSize(TypedValue.COMPLEX_UNIT_PX, trySize);
             }
-            this.setTextSize(TypedValue.COMPLEX_UNIT_PX, trySize);
+            setTextSize(TypedValue.COMPLEX_UNIT_PX, trySize);
         }
     }
 
@@ -61,52 +58,38 @@ public class CustomEditText extends AppCompatEditText {
         if (snackbar == null) {
             try {
                 snackbar = Snackbar.make(this, "Invalid Equation", Snackbar.LENGTH_INDEFINITE);
-            } catch (Exception e) {
+            } catch (Exception ignored) {
             }
         }
 
         invalid = false;
-        if (snackbar != null) {
-            new Thread() {
-                @Override
-                public void run() {
-                    try {
-                        Calculator.contextCalc(getText().toString(), getContext()) ;
-                    } catch(Exception e) {
-                        getActivity().runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                if (!snackbar.isShown()) {
-                                    snackbar.show();
-                                }
-                                invalid = true;
-                            }
-                        });
-                    }
-                    getActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            if (!invalid && snackbar != null && snackbar.isShown()) {
-                                snackbar.dismiss();
-                                try {
-                                    snackbar = Snackbar.make(CustomEditText.this, "Invalid Equation", Snackbar.LENGTH_INDEFINITE);
-                                } catch (Exception e) {
-                                }
-                            }
-                        }
-                    });
-                }
-                private Activity getActivity() {
-                    Context context = getContext();
-                    while (context instanceof ContextWrapper) {
-                        if (context instanceof Activity) {
-                            return (Activity)context;
-                        }
-                        context = ((ContextWrapper)context).getBaseContext();
-                    }
-                    return null;
-                }
-            }.start();
+
+        if (snackbar == null) return;
+
+        if (getText().length() < 1) {
+            if (!snackbar.isShown()) {
+                snackbar.show();
+            }
+            return;
+        }
+
+        try {
+            new ExpressionBuilder(getText().toString()).build().evaluate();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (!snackbar.isShown()) {
+                snackbar.show();
+            }
+            return;
+        }
+
+        if (snackbar.isShown()) {
+            snackbar.dismiss();
+
+            try {
+                snackbar = Snackbar.make(CustomEditText.this, "Invalid Equation", Snackbar.LENGTH_INDEFINITE);
+            } catch (Exception ignored) {
+            }
         }
     }
 

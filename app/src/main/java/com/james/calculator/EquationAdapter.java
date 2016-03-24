@@ -18,6 +18,8 @@ import android.widget.TextView;
 
 import com.example.james.calculator.R;
 
+import net.objecthunter.exp4j.ExpressionBuilder;
+
 import java.util.ArrayList;
 
 public class EquationAdapter extends RecyclerView.Adapter<EquationAdapter.ViewHolder> {
@@ -111,7 +113,7 @@ public class EquationAdapter extends RecyclerView.Adapter<EquationAdapter.ViewHo
                                 public void onClick(View v) {
                                     if (newAlert.isShowing()) {
                                         String eqe = aset.getText().toString();
-                                        addItem(tev.getText().toString(), eqe + " = " + Calculator.contextCalc(eqe, v.getContext()) );
+                                        addItem(tev.getText().toString(), eqe + " = " + String.valueOf(new ExpressionBuilder(eqe).build().evaluate()));
                                         refresh();
 
                                         newAlert.dismiss();

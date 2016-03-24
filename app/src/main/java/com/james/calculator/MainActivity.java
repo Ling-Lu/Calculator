@@ -22,9 +22,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.example.james.calculator.R;
+
+import net.objecthunter.exp4j.ExpressionBuilder;
 
 import java.util.ArrayList;
 
@@ -142,7 +143,12 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         if (newAlert.isShowing()) {
                             String eqe = aset.getText().toString();
-                            eq.addItem(tev.getText().toString(), eqe + " = " + Calculator.contextCalc(eqe, v.getContext()));
+
+                            try {
+                                eq.addItem(tev.getText().toString(), eqe + " = " + String.valueOf(new ExpressionBuilder(eqe).build().evaluate()));
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
 
                             newAlert.dismiss();
                         }
@@ -170,30 +176,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         boolean result = super.onPrepareOptionsMenu(menu);
-        menu.findItem(R.id.action_settings).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem menuItem) {
-                startActivity(new Intent(MainActivity.this, About.class));
-                return true;
-            }
-        });
         menu.findItem(R.id.tutorial).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
@@ -205,6 +189,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
                 startActivity(new Intent(MainActivity.this, PrefsSettings.class));
+                return true;
+            }
+        });
+        menu.findItem(R.id.about).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                startActivity(new Intent(MainActivity.this, About.class));
                 return true;
             }
         });

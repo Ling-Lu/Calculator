@@ -106,7 +106,7 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/content"
-                        android:text="A 15 year old developer - the maker of this app! He spends all of his time sitting in front of a computer typing useless descriptions into the about section."
+                        android:text="The maker of this app! He spends all of his time sitting in front of a computer typing useless descriptions into the about section."
                         android:paddingLeft="8dp"
                         android:paddingRight="8dp"
                         android:paddingBottom="8dp"
@@ -256,6 +256,47 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:text="Enables the use of Material Design dialogs down to API 8."
+                        android:paddingLeft="8dp"
+                        android:paddingRight="8dp"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"
+                        android:textSize="14sp"
+                        android:textColor="@color/text" />
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                card_view:cardUseCompatPadding="true"
+                android:layout_marginTop="2dp"
+                android:clickable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:layout_marginLeft="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginRight="8dp"
+                android:id="@+id/three">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="8dp"
+                    android:background="#fff">
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:text="exp4j"
+                        android:textColor="@color/header"
+                        android:padding="8dp"
+                        android:gravity="center_vertical"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:text="exp4j is a library capable of evaluating expressions and functions. It implements Dijkstra's Shunting Yard Algorithm to efficiently parse an expression and output the result."
                         android:paddingLeft="8dp"
                         android:paddingRight="8dp"
                         android:paddingTop="8dp"
