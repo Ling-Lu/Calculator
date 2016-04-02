@@ -47,7 +47,6 @@ public class FirstTime extends TutorialActivity {
                 return new TutorialFragment.Builder()
                         .setTitle("Quality Design")
                         .setDescription("The design of this calculator is based on Google\'s Material Design specifications.")
-                        .setImageResource(R.mipmap.hicalculatorfore)
                         .setImageResourceBackground(R.mipmap.hicalculator)
                         .build();
             case 2:
@@ -64,7 +63,7 @@ public class FirstTime extends TutorialActivity {
                         .setImageResource(R.mipmap.ic_update)
                         .setImageResourceBackground(R.mipmap.ic_white_rect)
                         .setCustomAction(new CustomAction.Builder(Uri.parse("https://plus.google.com/communities/104611531954046446240"))
-                                .setIcon(R.mipmap.ic_action_social_people)
+                                .setIcon(R.drawable.ic_group)
                                 .build())
                         .build();
             case 4:
@@ -74,7 +73,7 @@ public class FirstTime extends TutorialActivity {
                         .setImageResource(R.mipmap.rate_fg)
                         .setImageResourceBackground(R.mipmap.rate_bg)
                         .setCustomAction(new CustomAction.Builder(Uri.parse("https://play.google.com/store/apps/details?id=com.james.calculator"))
-                                .setIcon(R.mipmap.ic_play_store)
+                                .setIcon(R.drawable.ic_store)
                                 .build())
                         .build();
             default:

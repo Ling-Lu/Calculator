@@ -5,10 +5,10 @@
     <color name="primarydark">#455A64</color>
     <color name="accent">#2196F3</color>
 
-    <color name="text">#424242</color>
-    <color name="header">#212121</color>
-    <color name="text_light">#eeeeee</color>
-    <color name="header_light">#fafafa</color>
+    <color name="text">#8A000000</color>
+    <color name="header">#DE000000</color>
+    <color name="text_light">#B3ffffff</color>
+    <color name="header_light">#ffffff</color>
 
     <color name="red">#F44336</color>
     <color name="redd">#D32F2F</color>

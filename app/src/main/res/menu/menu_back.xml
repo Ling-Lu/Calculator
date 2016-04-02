@@ -2,9 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item android:id="@+id/googleplus" android:title="Go to google plus"
-        android:icon="@mipmap/ic_action_social_people"
+        android:icon="@drawable/ic_group"
         app:showAsAction="always"/>
     <item android:id="@+id/website" android:title="Go to website"
-        android:icon="@mipmap/ic_internet"
+        android:icon="@drawable/ic_web"
         app:showAsAction="always"/>
 </menu>

@@ -127,12 +127,11 @@ public class EquationAdapter extends RecyclerView.Adapter<EquationAdapter.ViewHo
                     });
 
                     Button delete = (Button) v.findViewById(R.id.delete);
-                    delete.setTag(v.getTag());
                     delete.setTextColor(accent);
                     delete.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            removeItem((int) v.getTag());
+                            removeItem(holder.getAdapterPosition());
                         }
                     });
                 }
